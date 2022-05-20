@@ -3,7 +3,7 @@ library(stringr)
 
 Experiment <- "HPLOH-UV"
 Scientist <- "JAC"
-SampleTypes <- c("Larvae", "Microscopy", "GF8", "Durapore")
+SampleTypes <- c("Larv", "Micro", "GF8", "Dura")
 Days <- c(0, 1, 2, 3)
 Treatments <- c("Ctrl", "UV")
 StartDate <- as.Date("2021/07/12")
@@ -16,7 +16,7 @@ ProtoDf <- expand.grid(SampleType = SampleTypes, Day = Days, Treatment = Treatme
   left_join(tibble(Days, Dates), by = c("Day" = "Days"))
 
 ProtoDf <- ProtoDf %>% 
-  mutate(label = paste(Experiment, paste("Day", Day, sep = " "),Treatment, paste("Rep", Replicate, sep = " "), Scientist, sep = "\n"))
+  mutate(label = paste0(Experiment, " ", SampleType, '\n', Dates, " ", Scientist, "\n",Treatment, " ", Replicate))
 
 SheetRows <- 17
 SheetCols <- 7
@@ -44,3 +44,5 @@ for(j in 1:LabCols){
   }
 }
 
+write.table(TubeTagMtx, "UVTubeTags.csv", sep = ",", row.names = FALSE, col.names = FALSE)
+write.table(LabelSheetMtx, "UVLabels.csv", sep = ",", row.names = FALSE, col.names = FALSE)

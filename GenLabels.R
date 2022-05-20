@@ -3,7 +3,7 @@ library(stringr)
 
   TubeTagString <- "HatchPLarv 2021 \n Cram # XXXX \n dna/rna shield"
   
-  Numbers <- seq(from = 185, by = 1, length.out = 17*7) %>%
+  Numbers <- seq(from = 304, by = 1, length.out = 17*7) %>%
     str_pad(width = 4, side = "left", pad = "0")
   
   TubeTagVec <- str_replace(TubeTagString, "XXXX", Numbers)
